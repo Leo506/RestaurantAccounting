@@ -2,12 +2,14 @@
 using System.Windows.Input;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using RestaurantAccounting.Interactions;
 using RestaurantAccounting.Services.Auth;
 
 namespace RestaurantAccounting.ViewModels;
 
 public class AuthViewModel : MvxViewModel
 {
+    #region Login
     private string _login;
     public string Login
     {
@@ -18,8 +20,9 @@ public class AuthViewModel : MvxViewModel
             RaisePropertyChanged(() => Login);
         }
     }
-
-
+    #endregion
+    
+    #region Password
     private string _password;
     public string Password
     {
@@ -30,9 +33,15 @@ public class AuthViewModel : MvxViewModel
             RaisePropertyChanged(() => Password);
         }
     }
+    #endregion
 
+    #region AuthFailedInteraction
+    private MvxInteraction<AlertInteraction> _authFailedInteraction = new();
+    public IMvxInteraction<AlertInteraction> AuthFailedInteraction => _authFailedInteraction;
+    #endregion
+    
+    #region AuthCommand
     private ICommand? _authCommand;
-
     public ICommand AuthCommand => _authCommand ??= new MvxCommand(() =>
     {
         try
@@ -43,10 +52,12 @@ public class AuthViewModel : MvxViewModel
         catch (Exception e)
         {
             Console.WriteLine(e);
-            // TODO show error popup
+            var request = new AlertInteraction() { Message = e.Message };
+            _authFailedInteraction.Raise(request);
         }
     });
-
+    #endregion
+    
     private IAuthService _authService;
     
     public AuthViewModel(IAuthService authService)
