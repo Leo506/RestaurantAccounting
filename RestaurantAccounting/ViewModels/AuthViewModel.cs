@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -46,26 +48,37 @@ public class AuthViewModel : MvxViewModel
     private ICommand? _authCommand;
     public ICommand AuthCommand => _authCommand ??= new MvxCommand(async () =>
     {
-        try
+        using (_logger.BeginScope(new Dictionary<string, object>()
+               {
+                   ["CorrelationId"] = Guid.NewGuid()
+               }))
         {
-            var user = _authService.Authenticate(Login, Password);
-            await _navigationService.Navigate<ProfileViewModel, UserModel>(user);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            var request = new AlertInteraction() { Message = e.Message };
-            _authFailedInteraction.Raise(request);
+            _logger.LogInformation("Try to authenticate user");
+            try
+            {
+                var user = _authService.Authenticate(Login, Password);
+                _logger.LogInformation($"User successfully authenticated. Navigate to {nameof(ProfileViewModel)}");
+                await _navigationService.Navigate<ProfileViewModel, UserModel>(user);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Failed to authenticate user");
+                var request = new AlertInteraction() { Message = e.Message };
+                _authFailedInteraction.Raise(request);
+            }
         }
     });
     #endregion
     
     private readonly IAuthService _authService;
     private readonly IMvxNavigationService _navigationService;
-    
-    public AuthViewModel(IAuthService authService, IMvxNavigationService navigationService)
+    private readonly ILogger<AuthViewModel> _logger;
+
+    public AuthViewModel(IAuthService authService, IMvxNavigationService navigationService,
+        ILogger<AuthViewModel> logger)
     {
         _authService = authService;
         _navigationService = navigationService;
+        _logger = logger;
     }
 }

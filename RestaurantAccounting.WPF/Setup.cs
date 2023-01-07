@@ -17,6 +17,9 @@ public class Setup : MvxWpfSetup<RestaurantAccounting.App>
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console()
+            .WriteTo.File("Logs\\AppLog.log",
+                outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj} CorrelationId:{CorrelationId}{NewLine}{Exception}")
+            .Enrich.FromLogContext()
             .CreateLogger();
 
         return new SerilogLoggerFactory();

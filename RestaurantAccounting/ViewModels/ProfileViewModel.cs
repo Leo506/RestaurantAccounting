@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Models;
@@ -39,13 +42,27 @@ public class ProfileViewModel : MvxViewModel<UserModel>
     public ICommand OpenShiftCommand =>
         _openShiftCommand ??= new MvxCommand(() =>
         {
-            IsPersonalShiftOpen = !IsPersonalShiftOpen;
-            OpenShiftText = IsPersonalShiftOpen ? "Close shift" : "Open shift";
+            using (_logger.BeginScope(new Dictionary<string, object>() { ["CorrelationId"] = Guid.NewGuid() }))
+            {
+                if (IsPersonalShiftOpen)
+                    _logger.LogInformation("Closing personal shift");
+                else
+                    _logger.LogInformation("Opening personal shift");
+                
+                IsPersonalShiftOpen = !IsPersonalShiftOpen;
+                OpenShiftText = IsPersonalShiftOpen ? "Close shift" : "Open shift";
+            }
         });
     #endregion
     
     private UserModel _userModel = default!;
-    
+    private readonly ILogger<ProfileViewModel> _logger;
+
+    public ProfileViewModel(ILogger<ProfileViewModel> logger)
+    {
+        _logger = logger;
+    }
+
     public override void Prepare(UserModel parameter)
     {
         _userModel = parameter;
