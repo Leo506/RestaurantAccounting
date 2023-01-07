@@ -7,7 +7,7 @@
              xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -15,7 +15,7 @@
         
         <TextBlock Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35"/>
         
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1">
             
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -34,7 +34,7 @@
                        Margin="10"/>
             
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Login, Mode=TwoWay}" 
-                     Height="20"
+                     Height="30"
                      FontSize="20"
                      Margin="10"/>
             
@@ -45,7 +45,7 @@
                        Margin="10"/>
             
             <PasswordBox Grid.Row="1" Grid.Column="1"
-                         Height="20"
+                         Height="30"
                          FontSize="20"
                          Margin="10"/>
             
