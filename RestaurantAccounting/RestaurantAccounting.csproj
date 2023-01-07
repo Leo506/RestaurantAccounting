@@ -57,6 +57,7 @@
         <Compile Include="Services\Auth\AuthService.cs" />
         <Compile Include="Services\Auth\IAuthService.cs" />
         <Compile Include="ViewModels\AuthViewModel.cs" />
+        <Compile Include="ViewModels\ProfileViewModel.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

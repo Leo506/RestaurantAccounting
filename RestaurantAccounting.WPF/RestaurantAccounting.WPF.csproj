@@ -89,6 +89,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Pages\ProfilePage.xaml.cs">
+          <DependentUpon>ProfilePage.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Setup.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -103,6 +106,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Pages\AuthPage.xaml" />
+        <Page Include="Pages\ProfilePage.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Pages\AuthPage.xaml.cs">
