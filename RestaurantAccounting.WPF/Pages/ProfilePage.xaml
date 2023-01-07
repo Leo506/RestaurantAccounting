@@ -8,6 +8,75 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+                   Text="Welcome" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Login:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+        
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                   Text="First Name:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+        
+        <TextBlock Grid.Row="3" Grid.Column="0"
+                   Text="Last Name:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0"
+                   Text="Personal Shift:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+        
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Text="{Binding Login}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1"
+                   Text="{Binding FirstName}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+        
+        <TextBlock Grid.Row="3" Grid.Column="1"
+                   Text="{Binding LastName}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
+        
+        <TextBlock Grid.Row="4" Grid.Column="1"
+                   Text="{Binding IsPersonalShiftOpen, Converter={StaticResource ShiftStatusConverter}}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="15"/>
     </Grid>
 </views:MvxWpfView>
