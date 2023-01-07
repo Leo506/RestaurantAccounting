@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantAccounting", "RestaurantAccounting\RestaurantAccounting.csproj", "{A8F77D74-7CE4-4220-AB8E-F318B82D3810}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantAccounting.WPF", "RestaurantAccounting.WPF\RestaurantAccounting.WPF.csproj", "{29C79A59-6EE6-4820-904B-129D0F8BE1B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{A8F77D74-7CE4-4220-AB8E-F318B82D3810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F77D74-7CE4-4220-AB8E-F318B82D3810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F77D74-7CE4-4220-AB8E-F318B82D3810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
