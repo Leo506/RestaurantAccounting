@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Interactions;
+using RestaurantAccounting.Models;
 using RestaurantAccounting.Services.Auth;
 
 namespace RestaurantAccounting.ViewModels;
@@ -42,12 +44,12 @@ public class AuthViewModel : MvxViewModel
     
     #region AuthCommand
     private ICommand? _authCommand;
-    public ICommand AuthCommand => _authCommand ??= new MvxCommand(() =>
+    public ICommand AuthCommand => _authCommand ??= new MvxCommand(async () =>
     {
         try
         {
             var user = _authService.Authenticate(Login, Password);
-            // TODO navigate to profile
+            await _navigationService.Navigate<ProfileViewModel, UserModel>(user);
         }
         catch (Exception e)
         {
@@ -58,10 +60,12 @@ public class AuthViewModel : MvxViewModel
     });
     #endregion
     
-    private IAuthService _authService;
+    private readonly IAuthService _authService;
+    private readonly IMvxNavigationService _navigationService;
     
-    public AuthViewModel(IAuthService authService)
+    public AuthViewModel(IAuthService authService, IMvxNavigationService navigationService)
     {
         _authService = authService;
+        _navigationService = navigationService;
     }
 }
