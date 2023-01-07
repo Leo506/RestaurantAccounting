@@ -43,13 +43,6 @@
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
-
-        <TextBlock Grid.Row="4" Grid.Column="0"
-                   Text="Personal Shift:"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Center"
-                   Margin="10"
-                   FontSize="15"/>
         
         <TextBlock Grid.Row="1" Grid.Column="1"
                    Text="{Binding Login}"
@@ -72,11 +65,23 @@
                    Margin="10"
                    FontSize="15"/>
         
-        <TextBlock Grid.Row="4" Grid.Column="1"
-                   Text="{Binding IsPersonalShiftOpen, Converter={StaticResource ShiftStatusConverter}}"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Margin="10"
-                   FontSize="15"/>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock
+                       Text="Personal Shift:"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="10"
+                       FontSize="15"/>
+            
+            <TextBlock
+                       Text="{Binding IsPersonalShiftOpen, Converter={StaticResource ShiftStatusConverter}}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="10"
+                       FontSize="15"/>
+            
+            <Button Padding="10" Margin="10" Command="{Binding OpenShiftCommand}" Content="{Binding OpenShiftText}"/>
+        </StackPanel>
+        
     </Grid>
 </views:MvxWpfView>
