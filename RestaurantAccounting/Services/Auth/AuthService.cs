@@ -10,11 +10,13 @@ public class AuthService : IAuthService
     {
         [("test", "password")] = new UserModel()
         {
-            Login = "test"
+            Login = "test",
+            IsPersonalShiftOpen = false
         },
         [("test2", "password2")] = new UserModel()
         {
-            Login = "test2"
+            Login = "test2",
+            IsPersonalShiftOpen = false
         }
     };
 
