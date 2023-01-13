@@ -45,7 +45,7 @@ namespace RestaurantAccounting.WPF.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("RestaurantAccounting.WPF.Properties.Resources",
+                        new global::System.Resources.ResourceManager("RestaurantAccounting.Core.WPF.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

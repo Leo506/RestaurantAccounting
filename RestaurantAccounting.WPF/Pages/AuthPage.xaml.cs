@@ -5,8 +5,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Interactions;
-using RestaurantAccounting.ViewModels;
+using RestaurantAccounting.Core.Interactions;
+using RestaurantAccounting.Core.ViewModels;
 
 namespace RestaurantAccounting.WPF.Pages;
 

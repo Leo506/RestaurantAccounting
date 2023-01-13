@@ -134,9 +134,9 @@
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\RestaurantAccounting\RestaurantAccounting.csproj">
+      <ProjectReference Include="..\RestaurantAccounting.Core\RestaurantAccounting.Core.csproj">
         <Project>{a8f77d74-7ce4-4220-ab8e-f318b82d3810}</Project>
-        <Name>RestaurantAccounting</Name>
+        <Name>RestaurantAccounting.Core</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

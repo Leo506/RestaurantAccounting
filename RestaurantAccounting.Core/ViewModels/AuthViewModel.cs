@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Interactions;
-using RestaurantAccounting.Models;
-using RestaurantAccounting.Services.Auth;
+using RestaurantAccounting.Core.Interactions;
+using RestaurantAccounting.Core.Models;
+using RestaurantAccounting.Core.Services.Auth;
 
-namespace RestaurantAccounting.ViewModels;
+namespace RestaurantAccounting.Core.ViewModels;
 
 public class AuthViewModel : MvxViewModel
 {

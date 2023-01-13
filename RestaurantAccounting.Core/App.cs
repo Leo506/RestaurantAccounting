@@ -1,9 +1,9 @@
 ﻿using MvvmCross;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Services.Auth;
-using RestaurantAccounting.ViewModels;
+using RestaurantAccounting.Core.Services.Auth;
+using RestaurantAccounting.Core.ViewModels;
 
-namespace RestaurantAccounting
+namespace RestaurantAccounting.Core
 {
     public class App : MvxApplication
     {

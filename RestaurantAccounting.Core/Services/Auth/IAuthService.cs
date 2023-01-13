@@ -1,6 +1,6 @@
-﻿using RestaurantAccounting.Models;
+﻿using RestaurantAccounting.Core.Models;
 
-namespace RestaurantAccounting.Services.Auth;
+namespace RestaurantAccounting.Core.Services.Auth;
 
 public interface IAuthService
 {

@@ -5,7 +5,7 @@ using Serilog.Extensions.Logging;
 
 namespace RestaurantAccounting.WPF;
 
-public class Setup : MvxWpfSetup<RestaurantAccounting.App>
+public class Setup : MvxWpfSetup<Core.App>
 {
     protected override ILoggerProvider CreateLogProvider()
     {

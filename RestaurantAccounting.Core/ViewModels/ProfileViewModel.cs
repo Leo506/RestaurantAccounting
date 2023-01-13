@@ -4,9 +4,9 @@ using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Models;
+using RestaurantAccounting.Core.Models;
 
-namespace RestaurantAccounting.ViewModels;
+namespace RestaurantAccounting.Core.ViewModels;
 
 public class ProfileViewModel : MvxViewModel<UserModel>
 {

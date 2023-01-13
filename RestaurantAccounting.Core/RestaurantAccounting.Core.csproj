@@ -7,8 +7,8 @@
         <ProjectGuid>{A8F77D74-7CE4-4220-AB8E-F318B82D3810}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>RestaurantAccounting</RootNamespace>
-        <AssemblyName>RestaurantAccounting</AssemblyName>
+        <RootNamespace>RestaurantAccounting.Core</RootNamespace>
+        <AssemblyName>RestaurantAccounting.Core</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>

@@ -1,4 +1,4 @@
-﻿namespace RestaurantAccounting.Interactions;
+﻿namespace RestaurantAccounting.Core.Interactions;
 
 public class AlertInteraction
 {

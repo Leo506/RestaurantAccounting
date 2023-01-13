@@ -1,4 +1,4 @@
-﻿namespace RestaurantAccounting.Models;
+﻿namespace RestaurantAccounting.Core.Models;
 
 public class UserModel
 {
