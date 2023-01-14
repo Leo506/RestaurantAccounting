@@ -9,7 +9,7 @@ namespace RestaurantAccounting.Core
     {
         public override void Initialize()
         {
-            Mvx.IoCProvider.RegisterType<IAuthService, AuthService>();
+            Mvx.IoCProvider.RegisterType<IAuthService, InMemoryAuthService>();
             
             RegisterAppStart<AuthViewModel>();
         }

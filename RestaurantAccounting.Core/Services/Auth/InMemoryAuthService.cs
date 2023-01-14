@@ -3,7 +3,7 @@ using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.Services.Auth;
 
-public class AuthService : IAuthService
+public class InMemoryAuthService : IAuthService
 {
     private readonly Dictionary<(string, string), UserModel> _users = new()
     {
