@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Interactions;
 using RestaurantAccounting.Core.Models;
 using RestaurantAccounting.Core.Services.Auth;
@@ -46,10 +47,7 @@ public class AuthViewModel : MvxViewModel
     private ICommand? _authCommand;
     public ICommand AuthCommand => _authCommand ??= new MvxCommand(async () =>
     {
-        using (_logger.BeginScope(new Dictionary<string, object>()
-               {
-                   ["CorrelationId"] = Guid.NewGuid()
-               }))
+        using (_logger.BeginScopeWithCorrelationId())
         {
             _logger.LogInformation("Try to authenticate user");
             try

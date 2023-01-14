@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Models;
 using RestaurantAccounting.Core.Services.Register;
 
@@ -53,8 +54,7 @@ public class RegistrationViewModel : MvxViewModel
 
     public ICommand RegistrationCommand => _registrationCommand ??= new MvxCommand(execute: async () =>
         {
-            // TODO try to replace BeginScope by custom extension method
-            using (_logger.BeginScope(new Dictionary<string, Guid>() { ["CorrelationId"] = Guid.NewGuid() }))
+            using (_logger.BeginScopeWithCorrelationId())
             {
                 try
                 {

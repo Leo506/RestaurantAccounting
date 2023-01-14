@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.ViewModels;
@@ -36,7 +37,7 @@ public class ProfileViewModel : MvxViewModel<Employee>
     public ICommand OpenShiftCommand =>
         _openShiftCommand ??= new MvxCommand(() =>
         {
-            using (_logger.BeginScope(new Dictionary<string, object>() { ["CorrelationId"] = Guid.NewGuid() }))
+            using (_logger.BeginScopeWithCorrelationId())
             {
                 if (_employee.PersonalShiftStatus == ShiftStatus.Open)
                     _logger.LogInformation("Closing personal shift");
