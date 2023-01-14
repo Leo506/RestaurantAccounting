@@ -4,6 +4,7 @@ using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Core.DbContexts;
 using RestaurantAccounting.Core.Services.Auth;
+using RestaurantAccounting.Core.Services.Register;
 using RestaurantAccounting.Core.ViewModels;
 
 namespace RestaurantAccounting.Core
@@ -16,9 +17,16 @@ namespace RestaurantAccounting.Core
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
             
             Mvx.IoCProvider.RegisterSingleton<IConfiguration>(configuration);
+            
+#if INMEMORY
+            Mvx.IoCProvider.RegisterType<IAuthService, InMemoryAuthService>();
+            Mvx.IoCProvider.RegisterType<IRegistrationService, InMemoryAuthService>();
+
+#else
             Mvx.IoCProvider.RegisterType<IAuthService, AuthService>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<EmployeeContext>(() =>
                 new EmployeeContext(configuration.GetConnectionString("postgres")!));
+#endif
             
             RegisterAppStart<AuthViewModel>();
         }

@@ -8,15 +8,20 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		InMemory|Any CPU = InMemory|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.InMemory|Any CPU.ActiveCfg = InMemory|Any CPU
+		{C1300E7E-7B53-4F5D-86F6-0F6463DB9758}.InMemory|Any CPU.Build.0 = InMemory|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.InMemory|Any CPU.ActiveCfg = InMemory|Any CPU
+		{29C79A59-6EE6-4820-904B-129D0F8BE1B7}.InMemory|Any CPU.Build.0 = InMemory|Any CPU
 	EndGlobalSection
 EndGlobal
