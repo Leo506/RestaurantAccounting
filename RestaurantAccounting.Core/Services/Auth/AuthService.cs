@@ -1,4 +1,5 @@
-﻿using RestaurantAccounting.Core.DbContexts;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantAccounting.Core.DbContexts;
 using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.Services.Auth;
@@ -15,5 +16,10 @@ public class AuthService : IAuthService
     public Employee Authenticate(string login, string password)
     {
         return _context.Employees.FirstOrDefault(x => x.Login == login && x.Password == password);
+    }
+
+    public async Task<Employee> AuthenticateAsync(string login, string password)
+    {
+        return await _context.Employees.FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
     }
 }

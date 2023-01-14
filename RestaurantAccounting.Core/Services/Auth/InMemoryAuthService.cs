@@ -29,4 +29,9 @@ public class InMemoryAuthService : IAuthService
             ? user
             : throw new AuthenticationException("Incorrect login or password");
     }
+
+    public Task<Employee> AuthenticateAsync(string login, string password)
+    {
+        return Task.FromResult(Authenticate(login, password));
+    }
 }

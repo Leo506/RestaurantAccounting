@@ -54,7 +54,7 @@ public class AuthViewModel : MvxViewModel
             _logger.LogInformation("Try to authenticate user");
             try
             {
-                var user = _authService.Authenticate(Login, Password);
+                var user = await _authService.AuthenticateAsync(Login, Password);
                 _logger.LogInformation($"User successfully authenticated. Navigate to {nameof(ProfileViewModel)}");
                 await _navigationService.Navigate<ProfileViewModel, Employee>(user);
             }
