@@ -14,20 +14,16 @@ public class ProfileViewModel : MvxViewModel<Employee>
 
     public string LastName => _employee.LastName;
 
-    public bool IsPersonalShiftOpen
+    public string PersonalShiftStatus
     {
-        get => _employee.ShiftStatus == ShiftStatus.Open;
-        set
-        {
-            _employee.ShiftStatus = value ? ShiftStatus.Open : ShiftStatus.Close;
-            RaisePropertyChanged(() => IsPersonalShiftOpen);
-        }
+        get => _employee.ShiftStatus;
+        set => _employee.ShiftStatus = value;
     }
 
     private string? _openShiftText = default!;
     public string OpenShiftText
     {
-        get => _openShiftText ??= IsPersonalShiftOpen ? "Close shift" : "Open shift";
+        get => _openShiftText ??= _employee.PersonalShiftStatus == ShiftStatus.Close ? "Close shift" : "Open shift";
         set
         {
             _openShiftText = value;
@@ -42,13 +38,13 @@ public class ProfileViewModel : MvxViewModel<Employee>
         {
             using (_logger.BeginScope(new Dictionary<string, object>() { ["CorrelationId"] = Guid.NewGuid() }))
             {
-                if (IsPersonalShiftOpen)
+                if (_employee.PersonalShiftStatus == ShiftStatus.Open)
                     _logger.LogInformation("Closing personal shift");
                 else
                     _logger.LogInformation("Opening personal shift");
                 
-                IsPersonalShiftOpen = !IsPersonalShiftOpen;
-                OpenShiftText = IsPersonalShiftOpen ? "Close shift" : "Open shift";
+                //IsPersonalShiftOpen = !IsPersonalShiftOpen;
+                //OpenShiftText = IsPersonalShiftOpen ? "Close shift" : "Open shift";
             }
         });
     #endregion

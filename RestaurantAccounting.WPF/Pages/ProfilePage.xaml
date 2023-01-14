@@ -74,7 +74,7 @@
                        FontSize="15"/>
             
             <TextBlock
-                       Text="{Binding IsPersonalShiftOpen, Converter={StaticResource ShiftStatusConverter}}"
+                       Text="{Binding PersonalShiftStatus}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="10"

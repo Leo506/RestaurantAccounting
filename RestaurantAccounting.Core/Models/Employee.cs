@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestaurantAccounting.Core.Models;
 
@@ -21,5 +22,12 @@ public partial class Employee
 
     public string Password { get; set; } = null!;
 
-    public ShiftStatus ShiftStatus { get; set; }
+    public string ShiftStatus { get; set; } = null!;
+
+    [NotMapped]
+    public ShiftStatus PersonalShiftStatus
+    {
+        get => ShiftStatus == "Open" ? Models. ShiftStatus. Open : Models. ShiftStatus. Close;
+        set => ShiftStatus = value == Models.ShiftStatus.Open ? "Open" : "Close";
+    }
 }

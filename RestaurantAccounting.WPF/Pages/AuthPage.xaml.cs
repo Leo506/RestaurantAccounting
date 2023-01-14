@@ -14,8 +14,8 @@ namespace RestaurantAccounting.WPF.Pages;
 [MvxViewFor(typeof(AuthViewModel))]
 public partial class AuthPage : MvxWpfView
 {
-    private IMvxInteraction<AlertInteraction> _alertInteraction;
-    public IMvxInteraction<AlertInteraction> AlertInteraction
+    private IMvxInteraction<AlertInteraction>? _alertInteraction;
+    public IMvxInteraction<AlertInteraction>? AlertInteraction
     {
         get => _alertInteraction;
         set
@@ -24,7 +24,8 @@ public partial class AuthPage : MvxWpfView
                 _alertInteraction.Requested -= OnAlertInteractionRequested;
 
             _alertInteraction = value;
-            _alertInteraction.Requested += OnAlertInteractionRequested;
+            if (_alertInteraction != null)
+                _alertInteraction.Requested += OnAlertInteractionRequested;
         }
     }
 

@@ -12,14 +12,14 @@ public class InMemoryAuthService : IAuthService
             Login = "test",
             FirstName = "Test",
             LastName = "Testov",
-            ShiftStatus = ShiftStatus.Close
+            PersonalShiftStatus = ShiftStatus.Close
         },
         [("test2", "password2")] = new Employee()
         {
             Login = "test2",
             FirstName = "Test2",
             LastName = "Testov2",
-            ShiftStatus = ShiftStatus.Close
+            PersonalShiftStatus = ShiftStatus.Close
         }
     };
 
