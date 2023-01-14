@@ -6,20 +6,20 @@ using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.ViewModels;
 
-public class ProfileViewModel : MvxViewModel<UserModel>
+public class ProfileViewModel : MvxViewModel<Employee>
 {
-    public string Login => _userModel.Login;
+    public string Login => _employee.Login;
 
-    public string FirstName => _userModel.FirstName;
+    public string FirstName => _employee.FirstName;
 
-    public string LastName => _userModel.LastName;
+    public string LastName => _employee.LastName;
 
     public bool IsPersonalShiftOpen
     {
-        get => _userModel.IsPersonalShiftOpen;
+        get => _employee.ShiftStatus == ShiftStatus.Open;
         set
         {
-            _userModel.IsPersonalShiftOpen = value;
+            _employee.ShiftStatus = value ? ShiftStatus.Open : ShiftStatus.Close;
             RaisePropertyChanged(() => IsPersonalShiftOpen);
         }
     }
@@ -53,7 +53,7 @@ public class ProfileViewModel : MvxViewModel<UserModel>
         });
     #endregion
     
-    private UserModel _userModel = default!;
+    private Employee _employee = default!;
     private readonly ILogger<ProfileViewModel> _logger;
 
     public ProfileViewModel(ILogger<ProfileViewModel> logger)
@@ -61,8 +61,8 @@ public class ProfileViewModel : MvxViewModel<UserModel>
         _logger = logger;
     }
 
-    public override void Prepare(UserModel parameter)
+    public override void Prepare(Employee parameter)
     {
-        _userModel = parameter;
+        _employee = parameter;
     }
 }
