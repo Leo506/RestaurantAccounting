@@ -67,6 +67,12 @@ public class AuthViewModel : MvxViewModel
         }
     });
     #endregion
+
+    #region NavigateToRegistration
+    private MvxCommand? _navigateToRegistrationCommand;
+    public ICommand NavigateToRegistration => _navigateToRegistrationCommand ??=
+        new MvxCommand(() => _navigationService.Navigate<RegistrationViewModel>());
+    #endregion
     
     private readonly IAuthService _authService;
     private readonly IMvxNavigationService _navigationService;
