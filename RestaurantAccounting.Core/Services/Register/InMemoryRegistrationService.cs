@@ -7,12 +7,12 @@ public partial class InMemoryAuthService : IRegistrationService
 {
     public void Register(Employee employee)
     {
-        _users.Add((employee.Login, employee.Password), employee);
+        Users.Add((employee.Login, employee.Password), employee);
     }
 
     public Task RegisterAsync(Employee employee)
     {
-        _users.Add((employee.Login, employee.Password), employee);
+        Users.Add((employee.Login, employee.Password), employee);
         return Task.CompletedTask;
     }
 }

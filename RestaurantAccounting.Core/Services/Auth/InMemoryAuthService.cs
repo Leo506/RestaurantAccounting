@@ -5,7 +5,7 @@ namespace RestaurantAccounting.Core.Services.Auth;
 
 public partial class InMemoryAuthService : IAuthService
 {
-    private readonly Dictionary<(string, string), Employee> _users = new()
+    private static readonly Dictionary<(string, string), Employee> Users = new()
     {
         [("test", "password")] = new Employee()
         {
@@ -25,7 +25,7 @@ public partial class InMemoryAuthService : IAuthService
 
     public Employee Authenticate(string login, string password)
     {
-        return _users.TryGetValue((login, password), out var user)
+        return Users.TryGetValue((login, password), out var user)
             ? user
             : throw new AuthenticationException("Incorrect login or password");
     }
