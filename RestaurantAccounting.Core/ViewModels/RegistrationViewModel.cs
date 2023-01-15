@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Models;
@@ -63,6 +64,7 @@ public class RegistrationViewModel : MvxViewModel
                 try
                 {
                     await _registrationService.RegisterAsync(_employee);
+                    await _navigationService.Navigate<AuthViewModel>();
                 }
                 catch (Exception e)
                 {
@@ -74,16 +76,16 @@ public class RegistrationViewModel : MvxViewModel
         canExecute: () => string.IsNullOrWhiteSpace(Login) is false && string.IsNullOrWhiteSpace(Password) is false &&
                           string.IsNullOrWhiteSpace(FirstName) is false && string.IsNullOrWhiteSpace(LastName) is false);
 
-    private readonly Employee _employee = new();
-
+    private readonly Employee _employee = new() { PersonalShiftStatus = ShiftStatus.Close };
     private readonly IRegistrationService _registrationService;
-
     private readonly ILogger<RegistrationViewModel> _logger;
+    private readonly IMvxNavigationService _navigationService;
 
-
-    public RegistrationViewModel(IRegistrationService registrationService, ILogger<RegistrationViewModel> logger)
+    public RegistrationViewModel(IRegistrationService registrationService, ILogger<RegistrationViewModel> logger,
+        IMvxNavigationService navigationService)
     {
         _registrationService = registrationService;
         _logger = logger;
+        _navigationService = navigationService;
     }
 }
