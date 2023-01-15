@@ -35,11 +35,13 @@ public partial class EmployeeContext : DbContext
 
             entity.ToTable("Employee", "Restaurant");
 
+            entity.HasIndex(e => e.Login, "Employee_Login_key").IsUnique();
+
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Login).HasMaxLength(20);
-            entity.Property(e => e.Password).HasMaxLength(1_000_000);
+            entity.Property(e => e.Password).HasMaxLength(1000000);
         });
 
         OnModelCreatingPartial(modelBuilder);
