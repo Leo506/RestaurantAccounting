@@ -19,15 +19,21 @@ public class AuthService : IAuthService
 
     public Employee Authenticate(string login, string password)
     {
-        password = PasswordEncryptor.EncryptPassword(password);
-        return _context.Employees.FirstOrDefault(x => x.Login == login && x.Password == password) ??
-               throw new AuthenticationException(AuthErrorMessage);
+        var user = _context.Employees.FirstOrDefault(x => x.Login == login) ??
+                   throw new AuthenticationException(AuthErrorMessage);
+        if (PasswordEncryptor.Verify(password, user.Password) is false)
+            throw new AuthenticationException(AuthErrorMessage);
+
+        return user;
     }
 
     public async Task<Employee> AuthenticateAsync(string login, string password)
     {
-        password = PasswordEncryptor.EncryptPassword(password);
-        return await _context.Employees.FirstOrDefaultAsync(x => x.Login == login && x.Password == password) ??
-               throw new AuthenticationException(AuthErrorMessage);
+        var user = await _context.Employees.FirstOrDefaultAsync(x => x.Login == login) ??
+                   throw new AuthenticationException(AuthErrorMessage);
+        if (PasswordEncryptor.Verify(password, user.Password) is false)
+            throw new AuthenticationException(AuthErrorMessage);
+
+        return user;
     }
 }

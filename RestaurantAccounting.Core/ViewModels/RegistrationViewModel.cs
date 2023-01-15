@@ -65,7 +65,7 @@ public class RegistrationViewModel : MvxViewModel
             }
             catch (Exception e)
             {
-                _logger.LogError("Failed to register new employee");
+                _logger.LogError("Failed to register new employee: {E}", e);
             }
         },
         // TODO replace bu more complex validation

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.DbContexts;
@@ -41,7 +39,7 @@ public partial class EmployeeContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Login).HasMaxLength(20);
-            entity.Property(e => e.Password).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(1_000_000);
         });
 
         OnModelCreatingPartial(modelBuilder);
