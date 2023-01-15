@@ -1,0 +1,48 @@
+﻿<views:MvxWpfView x:TypeArguments="viewModels:RegistrationViewModel" x:Class="RestaurantAccounting.WPF.Pages.RegistrationPage"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:local="clr-namespace:RestaurantAccounting.WPF.Pages"
+                  xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+                  xmlns:viewModels="clr-namespace:RestaurantAccounting.Core.ViewModels;assembly=RestaurantAccounting.Core"
+                  mc:Ignorable="d"
+                  d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.ColumnSpan="2" 
+                   Text="Registration" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="25" FontWeight="Bold"/>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="Login:"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="Password:"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="First name:"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="Last name:"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Register" 
+                Margin="50 10 50 10"
+                Command="{Binding RegistrationCommand}"/>
+        
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
+                 Text="{Binding Login}"/>
+        <PasswordBox Grid.Row="2" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
+                     PasswordChanged="OnPasswordChanged"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
+                 Text="{Binding FirstName}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
+                 Text="{Binding LastName}"/>
+        
+    </Grid>
+</views:MvxWpfView>
