@@ -1,5 +1,6 @@
 ﻿using RestaurantAccounting.Core.DbContexts;
 using RestaurantAccounting.Core.Models;
+using RestaurantAccounting.Core.Utils;
 
 namespace RestaurantAccounting.Core.Services.Register;
 
@@ -14,12 +15,14 @@ public class RegistrationService : IRegistrationService
 
     public void Register(Employee employee)
     {
+        employee.Password = PasswordEncryptor.EncryptPassword(employee.Password);
         _employeeContext.Employees.Add(employee);
         _employeeContext.SaveChanges();
     }
 
     public async Task RegisterAsync(Employee employee)
     {
+        employee.Password = PasswordEncryptor.EncryptPassword(employee.Password);
         await _employeeContext.Employees.AddAsync(employee);
         await _employeeContext.SaveChangesAsync();
     }
