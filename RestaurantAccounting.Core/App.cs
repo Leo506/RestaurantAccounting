@@ -24,6 +24,7 @@ namespace RestaurantAccounting.Core
 
 #else
             Mvx.IoCProvider.RegisterType<IAuthService, AuthService>();
+            Mvx.IoCProvider.RegisterType<IRegistrationService, RegistrationService>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<EmployeeContext>(() =>
                 new EmployeeContext(configuration.GetConnectionString("postgres")!));
 #endif

@@ -12,12 +12,14 @@ public partial class EmployeeContext : DbContext
     public EmployeeContext(string connectionString)
     {
         _connectionString = connectionString;
+        Database.EnsureCreated();
     }
 
     public EmployeeContext(DbContextOptions<EmployeeContext> options, string connectionString)
         : base(options)
     {
         _connectionString = connectionString;
+        Database.EnsureCreated();
     }
 
     public virtual DbSet<Employee> Employees { get; set; }
