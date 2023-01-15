@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Models;
 using RestaurantAccounting.Core.Services.Register;
 
@@ -59,17 +58,14 @@ public class RegistrationViewModel : MvxViewModel
 
     public ICommand RegistrationCommand => _registrationCommand ??= new MvxCommand(execute: async () =>
         {
-            using (_logger.BeginScopeWithCorrelationId())
+            try
             {
-                try
-                {
-                    await _registrationService.RegisterAsync(_employee);
-                    await _navigationService.Navigate<AuthViewModel>();
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError("Failed to register new employee");
-                }
+                await _registrationService.RegisterAsync(_employee);
+                await _navigationService.Navigate<AuthViewModel>();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Failed to register new employee");
             }
         },
         // TODO replace bu more complex validation

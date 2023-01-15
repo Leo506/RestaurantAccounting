@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Interactions;
 using RestaurantAccounting.Core.Models;
 using RestaurantAccounting.Core.Services.Auth;
@@ -47,21 +46,18 @@ public class AuthViewModel : MvxViewModel
     private ICommand? _authCommand;
     public ICommand AuthCommand => _authCommand ??= new MvxCommand(async () =>
     {
-        using (_logger.BeginScopeWithCorrelationId())
+        _logger.LogInformation("Try to authenticate user");
+        try
         {
-            _logger.LogInformation("Try to authenticate user");
-            try
-            {
-                var user = await _authService.AuthenticateAsync(Login, Password);
-                _logger.LogInformation($"User successfully authenticated. Navigate to {nameof(ProfileViewModel)}");
-                await _navigationService.Navigate<ProfileViewModel, Employee>(user);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("Failed to authenticate user");
-                var request = new AlertInteraction() { Message = e.Message };
-                _authFailedInteraction.Raise(request);
-            }
+            var user = await _authService.AuthenticateAsync(Login, Password);
+            _logger.LogInformation($"User successfully authenticated. Navigate to {nameof(ProfileViewModel)}");
+            await _navigationService.Navigate<ProfileViewModel, Employee>(user);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Failed to authenticate user");
+            var request = new AlertInteraction() { Message = e.Message };
+            _authFailedInteraction.Raise(request);
         }
     });
     #endregion
