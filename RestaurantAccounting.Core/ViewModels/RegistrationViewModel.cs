@@ -17,6 +17,7 @@ public class RegistrationViewModel : MvxViewModel
         {
             _employee.Login = value;
             RaisePropertyChanged(() => Login);
+            _registrationCommand?.RaiseCanExecuteChanged();
         }
     }
 
@@ -27,6 +28,7 @@ public class RegistrationViewModel : MvxViewModel
         {
             _employee.Password = value;
             RaisePropertyChanged(() => Password);
+            _registrationCommand?.RaiseCanExecuteChanged();
         }
     }
 
@@ -37,6 +39,7 @@ public class RegistrationViewModel : MvxViewModel
         {
             _employee.FirstName = value;
             RaisePropertyChanged(() => FirstName);
+            _registrationCommand?.RaiseCanExecuteChanged();
         }
     }
 
@@ -47,6 +50,7 @@ public class RegistrationViewModel : MvxViewModel
         {
             _employee.LastName = value;
             RaisePropertyChanged(() => LastName);
+            _registrationCommand?.RaiseCanExecuteChanged();
         }
     }
 
@@ -67,8 +71,8 @@ public class RegistrationViewModel : MvxViewModel
             }
         },
         // TODO replace bu more complex validation
-        canExecute: () => string.IsNullOrWhiteSpace(Login) is false && string.IsNullOrWhiteSpace(Password) &&
-                          string.IsNullOrWhiteSpace(FirstName) && string.IsNullOrWhiteSpace(LastName));
+        canExecute: () => string.IsNullOrWhiteSpace(Login) is false && string.IsNullOrWhiteSpace(Password) is false &&
+                          string.IsNullOrWhiteSpace(FirstName) is false && string.IsNullOrWhiteSpace(LastName) is false);
 
     private readonly Employee _employee = new();
 

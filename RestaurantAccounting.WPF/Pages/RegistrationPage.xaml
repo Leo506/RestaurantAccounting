@@ -36,13 +36,13 @@
                 Command="{Binding RegistrationCommand}"/>
         
         <TextBox Grid.Row="1" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
-                 Text="{Binding Login}"/>
+                 Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <PasswordBox Grid.Row="2" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
                      PasswordChanged="OnPasswordChanged"/>
         <TextBox Grid.Row="3" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
-                 Text="{Binding FirstName}"/>
+                 Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Row="4" Grid.Column="1" Margin="10 0 10 10" VerticalAlignment="Top"
-                 Text="{Binding LastName}"/>
+                 Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
     </Grid>
 </views:MvxWpfView>
