@@ -51,7 +51,7 @@ public class AuthViewModel : MvxViewModel
         {
             var user = await _authService.AuthenticateAsync(Login, Password);
             _logger.LogInformation($"User successfully authenticated. Navigate to {nameof(ProfileViewModel)}");
-            await _navigationService.Navigate<ProfileViewModel, Employee>(user);
+            await _navigationService.Navigate<MainViewModel, Employee>(user);
         }
         catch (Exception e)
         {
