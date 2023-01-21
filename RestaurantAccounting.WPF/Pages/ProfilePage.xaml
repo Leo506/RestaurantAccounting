@@ -14,74 +14,59 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"  Grid.RowSpan="2"
                    Text="Welcome" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <Button Grid.Row="0" Grid.Column="0" Margin="5 15 60 15" Content="Back"
+                Command="{Binding BackCommand}"/>
         
-        <TextBlock Grid.Row="1" Grid.Column="0"
+        <TextBlock Grid.Row="2" Grid.Column="0"
                    Text="Login:"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
         
-        <TextBlock Grid.Row="2" Grid.Column="0"
+        <TextBlock Grid.Row="3" Grid.Column="0"
                    Text="First Name:"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
         
-        <TextBlock Grid.Row="3" Grid.Column="0"
+        <TextBlock Grid.Row="4" Grid.Column="0"
                    Text="Last Name:"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
         
-        <TextBlock Grid.Row="1" Grid.Column="1"
+        <TextBlock Grid.Row="2" Grid.Column="1"
                    Text="{Binding Login}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="1"
+        <TextBlock Grid.Row="3" Grid.Column="1"
                    Text="{Binding FirstName}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
         
-        <TextBlock Grid.Row="3" Grid.Column="1"
+        <TextBlock Grid.Row="4" Grid.Column="1"
                    Text="{Binding LastName}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Margin="10"
                    FontSize="15"/>
-        
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock
-                       Text="Personal Shift:"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Margin="10"
-                       FontSize="15"/>
-            
-            <TextBlock
-                       Text="{Binding PersonalShiftStatus}"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="10"
-                       FontSize="15"/>
-            
-            <Button Padding="10" Margin="10" Command="{Binding OpenShiftCommand}" Content="{Binding OpenShiftText}"/>
-        </StackPanel>
         
     </Grid>
 </views:MvxWpfView>

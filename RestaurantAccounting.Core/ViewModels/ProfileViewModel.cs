@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Core.Models;
 
@@ -31,24 +32,17 @@ public class ProfileViewModel : MvxViewModel<Employee>
         }
     }
 
-    #region OpenShiftCommand
-    private MvxCommand? _openShiftCommand;
-    public ICommand OpenShiftCommand =>
-        _openShiftCommand ??= new MvxCommand(() =>
-        {
-            if (_employee.PersonalShiftStatus == ShiftStatus.Open)
-                    _logger.LogInformation("Closing personal shift");
-            else
-                _logger.LogInformation("Opening personal shift");
-        });
-    #endregion
-    
+    private MvxCommand? _backCommand;
+    public ICommand BackCommand => _backCommand ??= new MvxCommand(() => _navigationService.Close(this));
+
     private Employee _employee = default!;
     private readonly ILogger<ProfileViewModel> _logger;
+    private readonly IMvxNavigationService _navigationService;
 
-    public ProfileViewModel(ILogger<ProfileViewModel> logger)
+    public ProfileViewModel(ILogger<ProfileViewModel> logger, IMvxNavigationService navigationService)
     {
         _logger = logger;
+        _navigationService = navigationService;
     }
 
     public override void Prepare(Employee parameter)
