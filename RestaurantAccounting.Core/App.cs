@@ -4,6 +4,7 @@ using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Core.DbContexts;
 using RestaurantAccounting.Core.Services.Auth;
+using RestaurantAccounting.Core.Services.ProductService;
 using RestaurantAccounting.Core.Services.Register;
 using RestaurantAccounting.Core.ViewModels;
 
@@ -27,6 +28,7 @@ namespace RestaurantAccounting.Core
             Mvx.IoCProvider.RegisterType<IRegistrationService, RegistrationService>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<EmployeeContext>(() =>
                 new EmployeeContext(configuration.GetConnectionString("postgres")!));
+            Mvx.IoCProvider.RegisterType<IProductService, ProductService>();
 #endif
             
             RegisterAppStart<AuthViewModel>();

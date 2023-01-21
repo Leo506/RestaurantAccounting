@@ -13,6 +13,11 @@ public class MainViewModel : MvxViewModel<Employee>
     public ICommand OpenProfileCommand => _openProfileCommand ??= new MvxCommand(OpenProfile);
     #endregion
 
+    #region OpenProductspage
+    private MvxCommand? _openProductsPage;
+    public ICommand OpenProductsPage => _openProductsPage ??= new MvxCommand(OpenProducts);
+    #endregion
+    
     private readonly IMvxNavigationService _navigationService;
     private Employee _employee;
 
@@ -24,6 +29,11 @@ public class MainViewModel : MvxViewModel<Employee>
     private void OpenProfile()
     {
         _navigationService.Navigate<ProfileViewModel, Employee>(_employee);
+    }
+
+    private void OpenProducts()
+    {
+        _navigationService.Navigate<ProductsViewModel>();
     }
 
     public override void Prepare(Employee parameter)
