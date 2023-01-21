@@ -3,27 +3,13 @@ using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.DbContexts;
 
-public partial class EmployeeContext : DbContext
+public sealed partial class EmployeeContext : DbContext
 {
-    private readonly string _connectionString;
-    
-    public EmployeeContext(string connectionString)
-    {
-        _connectionString = connectionString;
-        Database.EnsureCreated();
-    }
+    public DbSet<Employee> Employees { get; set; }
 
-    public EmployeeContext(DbContextOptions<EmployeeContext> options, string connectionString)
-        : base(options)
-    {
-        _connectionString = connectionString;
-        Database.EnsureCreated();
-    }
+    public DbSet<EmployeePermission> EmployeePermissions { get; set; }
 
-    public virtual DbSet<Employee> Employees { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(_connectionString);
+    public DbSet<Permission> Permissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,6 +29,35 @@ public partial class EmployeeContext : DbContext
             entity.Property(e => e.Login).HasMaxLength(20);
             entity.Property(e => e.Password).HasMaxLength(1000000);
         });
+
+        modelBuilder.Entity<EmployeePermission>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("EmployeePermissions_pk");
+
+            entity.ToTable("EmployeePermissions", "Restaurant");
+
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.PermissionCode).HasMaxLength(25);
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.EmployeePermissions)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("EmployeePermissions_Employee_null_fk");
+
+            entity.HasOne(d => d.PermissionCodeNavigation).WithMany(p => p.EmployeePermissions)
+                .HasForeignKey(d => d.PermissionCode)
+                .HasConstraintName("EmployeePermissions_Permissions_null_fk");
+        });
+
+        modelBuilder.Entity<Permission>(entity =>
+        {
+            entity.HasKey(e => e.PermissionCode).HasName("Permissions_pk");
+
+            entity.ToTable("Permissions", "Restaurant");
+
+            entity.Property(e => e.PermissionCode).HasMaxLength(25);
+            entity.Property(e => e.Description).HasMaxLength(150);
+        });
+        modelBuilder.HasSequence("Id", "Restaurant");
 
         OnModelCreatingPartial(modelBuilder);
     }

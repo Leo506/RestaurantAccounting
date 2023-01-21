@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace RestaurantAccounting.Core.Models;
-
-public enum ShiftStatus
-{
-    Close,
-    Open
-}
+﻿namespace RestaurantAccounting.Core.Models;
 
 public partial class Employee
 {
@@ -24,10 +14,5 @@ public partial class Employee
 
     public string ShiftStatus { get; set; } = null!;
 
-    [NotMapped]
-    public ShiftStatus PersonalShiftStatus
-    {
-        get => ShiftStatus == "Open" ? Models. ShiftStatus. Open : Models. ShiftStatus. Close;
-        set => ShiftStatus = value == Models.ShiftStatus.Open ? "Open" : "Close";
-    }
+    public virtual ICollection<EmployeePermission> EmployeePermissions { get; } = new List<EmployeePermission>();
 }
