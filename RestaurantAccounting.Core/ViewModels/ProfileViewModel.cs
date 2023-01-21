@@ -32,8 +32,8 @@ public class ProfileViewModel : MvxViewModel<Employee>
         }
     }
 
-    private MvxCommand? _backCommand;
-    public ICommand BackCommand => _backCommand ??= new MvxCommand(() => _navigationService.Close(this));
+    private MvxAsyncCommand? _backCommand;
+    public ICommand BackCommand => _backCommand ??= new MvxAsyncCommand(async () => await _navigationService.Close(this));
 
     private Employee _employee = default!;
     private readonly ILogger<ProfileViewModel> _logger;

@@ -10,8 +10,8 @@ namespace RestaurantAccounting.Core.ViewModels;
 public class ProductsViewModel : MvxViewModel
 {
     #region BackCommand
-    private MvxCommand? _backCommand;
-    public ICommand BackCommand => _backCommand ??= new MvxCommand(() => _navigationService.Close(this));
+    private MvxAsyncCommand? _backCommand;
+    public ICommand BackCommand => _backCommand ??= new MvxAsyncCommand(async () => await _navigationService.Close(this));
     #endregion
 
     private string _searchScope;

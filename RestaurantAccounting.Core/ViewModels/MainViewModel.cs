@@ -9,13 +9,13 @@ namespace RestaurantAccounting.Core.ViewModels;
 public class MainViewModel : MvxViewModel<Employee>
 {
     #region OpenProfileCommand
-    private MvxCommand? _openProfileCommand;
-    public ICommand OpenProfileCommand => _openProfileCommand ??= new MvxCommand(OpenProfile);
+    private MvxAsyncCommand? _openProfileCommand;
+    public ICommand OpenProfileCommand => _openProfileCommand ??= new MvxAsyncCommand(OpenProfile);
     #endregion
 
     #region OpenProductspage
-    private MvxCommand? _openProductsPage;
-    public ICommand OpenProductsPage => _openProductsPage ??= new MvxCommand(OpenProducts);
+    private MvxAsyncCommand? _openProductsPage;
+    public ICommand OpenProductsPage => _openProductsPage ??= new MvxAsyncCommand(OpenProducts);
     #endregion
     
     private readonly IMvxNavigationService _navigationService;
@@ -26,14 +26,14 @@ public class MainViewModel : MvxViewModel<Employee>
         _navigationService = navigationService;
     }
 
-    private void OpenProfile()
+    private async Task OpenProfile()
     {
-        _navigationService.Navigate<ProfileViewModel, Employee>(_employee);
+        await _navigationService.Navigate<ProfileViewModel, Employee>(_employee);
     }
 
-    private void OpenProducts()
+    private async Task OpenProducts()
     {
-        _navigationService.Navigate<ProductsViewModel>();
+        await _navigationService.Navigate<ProductsViewModel>();
     }
 
     public override void Prepare(Employee parameter)
