@@ -14,5 +14,5 @@ public partial class Employee
 
     public string ShiftStatus { get; set; } = null!;
 
-    public virtual ICollection<EmployeePermission> EmployeePermissions { get; } = new List<EmployeePermission>();
+    public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; } = new List<EmployeePermission>();
 }

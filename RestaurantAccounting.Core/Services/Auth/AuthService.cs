@@ -23,7 +23,7 @@ public class AuthService : IAuthService
                    throw new AuthenticationException(AuthErrorMessage);
         if (PasswordEncryptor.Verify(password, user.Password) is false)
             throw new AuthenticationException(AuthErrorMessage);
-
+        
         return user;
     }
 
@@ -34,6 +34,8 @@ public class AuthService : IAuthService
         if (PasswordEncryptor.Verify(password, user.Password) is false)
             throw new AuthenticationException(AuthErrorMessage);
 
+        user.EmployeePermissions = await _context.EmployeePermissions.Where(x => x.EmployeeId == user.Id).ToListAsync();
+        
         return user;
     }
 }

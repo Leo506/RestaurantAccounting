@@ -2,6 +2,7 @@
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using RestaurantAccounting.Core.Extensions;
 using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.ViewModels;
@@ -33,7 +34,8 @@ public class MainViewModel : MvxViewModel<Employee>
 
     private async Task OpenProducts()
     {
-        await _navigationService.Navigate<ProductsViewModel>();
+        await _navigationService.NavigateIfHavePermission<ProductsViewModel>(_employee,
+            PermissionConstants.PermissionToSeeActiveProducts);
     }
 
     public override void Prepare(Employee parameter)
