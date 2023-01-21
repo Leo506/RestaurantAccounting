@@ -2,7 +2,7 @@
 
 namespace RestaurantAccounting.Core.DbContexts;
 
-public sealed partial class EmployeeContext
+public partial class EmployeeContext
 {
     private readonly string _connectionString;
 

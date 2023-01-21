@@ -3,14 +3,16 @@ using RestaurantAccounting.Core.Models;
 
 namespace RestaurantAccounting.Core.DbContexts;
 
-public sealed partial class EmployeeContext : DbContext
+public partial class EmployeeContext : DbContext
 {
-    public DbSet<Employee> Employees { get; set; }
+    public virtual DbSet<Employee> Employees { get; set; }
 
-    public DbSet<EmployeePermission> EmployeePermissions { get; set; }
+    public virtual DbSet<EmployeePermission> EmployeePermissions { get; set; }
 
-    public DbSet<Permission> Permissions { get; set; }
+    public virtual DbSet<Permission> Permissions { get; set; }
 
+    public virtual DbSet<Product> Products { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasPostgresEnum("shiftstatus", new[] { "Open", "Close" });
@@ -56,6 +58,16 @@ public sealed partial class EmployeeContext : DbContext
 
             entity.Property(e => e.PermissionCode).HasMaxLength(25);
             entity.Property(e => e.Description).HasMaxLength(150);
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Product_pk");
+
+            entity.ToTable("Product", "Restaurant");
+
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.ProductName).HasMaxLength(200);
         });
         modelBuilder.HasSequence("Id", "Restaurant");
 
