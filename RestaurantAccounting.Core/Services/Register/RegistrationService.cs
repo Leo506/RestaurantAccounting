@@ -26,4 +26,14 @@ public class RegistrationService : IRegistrationService
         await _employeeContext.Employees.AddAsync(employee);
         await _employeeContext.SaveChangesAsync();
     }
+
+    public async Task AddPermission(Employee employee, string permissionCode)
+    {
+        await _employeeContext.EmployeePermissions.AddAsync(new EmployeePermission()
+        {
+            EmployeeId = employee.Id,
+            PermissionCode = permissionCode
+        });
+        await _employeeContext.SaveChangesAsync();
+    }
 }

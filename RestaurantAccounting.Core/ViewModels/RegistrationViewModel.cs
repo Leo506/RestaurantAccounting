@@ -61,6 +61,7 @@ public class RegistrationViewModel : MvxViewModel
             try
             {
                 await _registrationService.RegisterAsync(_employee);
+                await _registrationService.AddPermission(_employee, PermissionConstants.PermissionToSeeActiveProducts);
                 await _navigationService.Navigate<AuthViewModel>();
             }
             catch (Exception e)
@@ -72,7 +73,10 @@ public class RegistrationViewModel : MvxViewModel
         canExecute: () => string.IsNullOrWhiteSpace(Login) is false && string.IsNullOrWhiteSpace(Password) is false &&
                           string.IsNullOrWhiteSpace(FirstName) is false && string.IsNullOrWhiteSpace(LastName) is false);
 
-    private readonly Employee _employee = new() { PersonalShiftStatus = ShiftStatus.Close };
+    private readonly Employee _employee = new()
+    {
+        PersonalShiftStatus = ShiftStatus.Close
+    };
     private readonly IRegistrationService _registrationService;
     private readonly ILogger<RegistrationViewModel> _logger;
     private readonly IMvxNavigationService _navigationService;

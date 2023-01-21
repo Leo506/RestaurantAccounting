@@ -15,4 +15,9 @@ public partial class InMemoryAuthService : IRegistrationService
         Users.Add((employee.Login, employee.Password), employee);
         return Task.CompletedTask;
     }
+
+    public Task AddPermission(Employee employee, string permissionCode)
+    {
+        throw new NotImplementedException();
+    }
 }
