@@ -22,4 +22,9 @@ public class ProductService : IProductService
     {
         return _context.Products.ToList();
     }
+
+    public List<Product> Get(Func<Product, bool> predicate)
+    {
+        return _context.Products.Where(predicate).ToList();
+    }
 }

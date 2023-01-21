@@ -9,8 +9,26 @@ namespace RestaurantAccounting.Core.ViewModels;
 
 public class ProductsViewModel : MvxViewModel
 {
+    #region BackCommand
     private MvxCommand? _backCommand;
     public ICommand BackCommand => _backCommand ??= new MvxCommand(() => _navigationService.Close(this));
+    #endregion
+
+    private string _searchScope;
+    public string SearchScope
+    {
+        get => _searchScope;
+        set
+        {
+            _searchScope = value;
+            Products = string.IsNullOrWhiteSpace(_searchScope)
+                ? new MvxObservableCollection<Product>(_productService.GetAll())
+                : new MvxObservableCollection<Product>(_productService.Get(x => x.ProductName.Contains(_searchScope)));
+            
+            RaisePropertyChanged(() => Products);
+            RaisePropertyChanged(() => SearchScope);
+        }
+    }
     
     public MvxObservableCollection<Product> Products { get; private set; }
 

@@ -10,4 +10,9 @@ public partial class ProductsPage : MvxWpfView<ProductsViewModel>
     {
         InitializeComponent();
     }
+
+    private void OnSearchScopeChanged(object sender, TextChangedEventArgs e)
+    {
+        ViewModel.SearchScope = ((TextBox)sender).Text;
+    }
 }
