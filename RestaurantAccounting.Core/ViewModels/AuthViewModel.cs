@@ -37,11 +37,6 @@ public class AuthViewModel : MvxViewModel
     }
     #endregion
 
-    #region AuthFailedInteraction
-    private MvxInteraction<AlertInteraction> _authFailedInteraction = new();
-    public IMvxInteraction<AlertInteraction> AuthFailedInteraction => _authFailedInteraction;
-    #endregion
-    
     #region AuthCommand
     private ICommand? _authCommand;
     public ICommand AuthCommand => _authCommand ??= new MvxCommand(async () =>
@@ -56,8 +51,7 @@ public class AuthViewModel : MvxViewModel
         catch (Exception e)
         {
             _logger.LogError("Failed to authenticate user");
-            var request = new AlertInteraction() { Message = e.Message };
-            _authFailedInteraction.Raise(request);
+            _alert.Alert(e.Message, "Authentication failed", AlertType.Error);
         }
     });
     #endregion
@@ -71,12 +65,14 @@ public class AuthViewModel : MvxViewModel
     private readonly IAuthService _authService;
     private readonly IMvxNavigationService _navigationService;
     private readonly ILogger<AuthViewModel> _logger;
+    private readonly IAlertInteraction _alert;
 
     public AuthViewModel(IAuthService authService, IMvxNavigationService navigationService,
-        ILogger<AuthViewModel> logger)
+        ILogger<AuthViewModel> logger, IAlertInteraction alert)
     {
         _authService = authService;
         _navigationService = navigationService;
         _logger = logger;
+        _alert = alert;
     }
 }
