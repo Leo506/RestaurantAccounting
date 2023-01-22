@@ -7,54 +7,30 @@ using SemanticComparison.Fluent;
 
 namespace RestaurantAccounting.Core.UnitTests.AuthService;
 
-public partial class AuthServiceTests
+public partial class AuthServiceTests : TestBase
 {
-    private EmployeeContext _context;
 
-    private Employee _employee = new Employee()
-    {
-        FirstName = "Test",
-        LastName = "Test",
-        Login = "Test",
-        Password = PasswordEncryptor.EncryptPassword("password"),
-        ShiftStatus = "Close"
-    };
-    
-    [SetUp]
-    public void BeforeEachTest()
-    {
-        _context = new DbContextHelper().Context;
-        _context.Employees.Add(_employee);
-        _context.SaveChanges();
-    }
-    
     [Test]
     public void Authenticate_LoginAndPasswordCorrect_ReturnsEmployee()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
 
         // act
         var result = sut.Authenticate("Test", "password");
 
         // assert
-        _employee.AsSource().OfLikeness<Employee>().Without(x => x.Id).Without(x => x.ShiftStatus)
+        Employee.AsSource().OfLikeness<Employee>().Without(x => x.Id).Without(x => x.ShiftStatus)
             .ShouldEqual(result);
         
-        _context.Dispose();
-    }
-
-    [TearDown]
-    public void AfterEachTest()
-    {
-        _context.Dispose();
+        Context.Dispose();
     }
 
     [Test]
     public void Authenticate_LoginIncorrect_ThrowsAuthenticationException()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
         
         // act and assert
         Assert.Throws<AuthenticationException>(() => sut.Authenticate("Incorrect", "password"));
@@ -64,7 +40,7 @@ public partial class AuthServiceTests
     public void Authenticate_PasswordIncorrect_ThrowsAuthenticationException()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
         
         // act and assert
         Assert.Throws<AuthenticationException>(() => sut.Authenticate("Test", "incorrect"));

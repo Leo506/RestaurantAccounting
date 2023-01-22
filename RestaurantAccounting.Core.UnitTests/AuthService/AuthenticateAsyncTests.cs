@@ -10,20 +10,20 @@ public partial class AuthServiceTests
     public async Task AuthenticateAsync_LoginAndPasswordCorrect_ReturnsEmployee()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
         
         // act
         var result = await sut.AuthenticateAsync("Test", "password");
         
         // assert
-        result.AsSource().OfLikeness<Employee>().Without(x => x.Id).Without(x => x.ShiftStatus).ShouldEqual(result);
+        Employee.AsSource().OfLikeness<Employee>().Without(x => x.Id).Without(x => x.ShiftStatus).ShouldEqual(result);
     }
 
     [Test]
     public void AuthenticateAsync_LoginIncorrect_ThrowsAuthenticationException()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
         
         // act and assert
         async Task AuthAction() => await sut.AuthenticateAsync("Incorrect", "password");
@@ -34,7 +34,7 @@ public partial class AuthServiceTests
     public void AuthenticateAsync_PasswordIncorrect_ThrowsAuthenticationException()
     {
         // arrange
-        var sut = new Services.Auth.AuthService(_context);
+        var sut = new Services.Auth.AuthService(Context);
         
         // act and assert
         async Task AuthAction() => await sut.AuthenticateAsync("Test", "Incorrect");
