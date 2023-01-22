@@ -23,7 +23,8 @@ public class ProductsViewModel : MvxViewModel
             _searchScope = value;
             Products = string.IsNullOrWhiteSpace(_searchScope)
                 ? new MvxObservableCollection<Product>(_productService.GetAll())
-                : new MvxObservableCollection<Product>(_productService.Get(x => x.ProductName.Contains(_searchScope)));
+                : new MvxObservableCollection<Product>(_productService.Get(x =>
+                    x.ProductName.ToLower().Contains(_searchScope.ToLower())));
             
             RaisePropertyChanged(() => Products);
             RaisePropertyChanged(() => SearchScope);
