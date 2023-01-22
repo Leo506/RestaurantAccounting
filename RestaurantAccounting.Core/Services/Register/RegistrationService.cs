@@ -1,4 +1,5 @@
-﻿using RestaurantAccounting.Core.DbContexts;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantAccounting.Core.DbContexts;
 using RestaurantAccounting.Core.Models;
 using RestaurantAccounting.Core.Utils;
 
@@ -15,6 +16,8 @@ public class RegistrationService : IRegistrationService
 
     public void Register(Employee employee)
     {
+        if (_employeeContext.Employees.Any(x => x.Login == employee.Login))
+            throw new InvalidDataException("There is employee with same login");
         employee.Password = PasswordEncryptor.EncryptPassword(employee.Password);
         _employeeContext.Employees.Add(employee);
         _employeeContext.SaveChanges();
@@ -22,6 +25,8 @@ public class RegistrationService : IRegistrationService
 
     public async Task RegisterAsync(Employee employee)
     {
+        if (await _employeeContext.Employees.AnyAsync(x => x.Login == employee.Login))
+            throw new InvalidDataException("There is employee with same login");
         employee.Password = PasswordEncryptor.EncryptPassword(employee.Password);
         await _employeeContext.Employees.AddAsync(employee);
         await _employeeContext.SaveChangesAsync();
