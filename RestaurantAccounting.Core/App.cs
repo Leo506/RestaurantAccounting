@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
@@ -28,7 +29,8 @@ namespace RestaurantAccounting.Core
             Mvx.IoCProvider.RegisterType<IAuthService, AuthService>();
             Mvx.IoCProvider.RegisterType<IRegistrationService, RegistrationService>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<EmployeeContext>(() =>
-                new EmployeeContext(configuration.GetConnectionString("postgres")!));
+                new EmployeeContext(new DbContextOptionsBuilder<EmployeeContext>()
+                    .UseNpgsql(configuration.GetConnectionString("postgres")).Options));
             Mvx.IoCProvider.RegisterType<IProductService, ProductService>();
 #endif
             
