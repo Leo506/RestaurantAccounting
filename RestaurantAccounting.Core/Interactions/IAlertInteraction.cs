@@ -9,5 +9,5 @@ public enum AlertType
 
 public interface IAlertInteraction
 {
-    public void AlertAsync(string message, string title = "", AlertType alertType = AlertType.None);
+    public void Alert(string message, string title = "", AlertType alertType = AlertType.None);
 }

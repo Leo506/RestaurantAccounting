@@ -6,7 +6,7 @@ namespace RestaurantAccounting.WPF.Interactions;
 
 public class AlertInteraction : IAlertInteraction
 {
-    public void AlertAsync(string message, string title = "", AlertType alertType = AlertType.None)
+    public void Alert(string message, string title = "", AlertType alertType = AlertType.None)
     {
         var icon = alertType switch
         {
