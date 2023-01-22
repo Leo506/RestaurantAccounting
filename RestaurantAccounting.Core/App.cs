@@ -3,6 +3,7 @@ using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 using RestaurantAccounting.Core.DbContexts;
+using RestaurantAccounting.Core.Services;
 using RestaurantAccounting.Core.Services.Auth;
 using RestaurantAccounting.Core.Services.ProductService;
 using RestaurantAccounting.Core.Services.Register;
@@ -31,6 +32,7 @@ namespace RestaurantAccounting.Core
             Mvx.IoCProvider.RegisterType<IProductService, ProductService>();
 #endif
             
+            DbFiller.FillDb(Mvx.IoCProvider.Resolve<EmployeeContext>());
             RegisterAppStart<AuthViewModel>();
         }
     }
