@@ -12,7 +12,7 @@ public class DbContextHelper
     public DbContextHelper()
     {
         var builder = new DbContextOptionsBuilder<EmployeeContext>();
-        builder.UseInMemoryDatabase("Database_test")
+        builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
             .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning));
 
         var options = builder.Options;
